@@ -12,7 +12,7 @@ class MemexFetcher {
   }
 
   post(url: string, data: Record<string, unknown>) {
-    this.fetcher.post(url, data);
+    return this.fetcher.post(url, data);
   }
 }
 

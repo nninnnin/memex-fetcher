@@ -10,7 +10,7 @@ var MemexFetcher = /** @class */ (function () {
         });
     }
     MemexFetcher.prototype.post = function (url, data) {
-        this.fetcher.post(url, data);
+        return this.fetcher.post(url, data);
     };
     return MemexFetcher;
 }());
