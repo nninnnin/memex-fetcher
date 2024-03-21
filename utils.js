@@ -1,21 +1,26 @@
 import { pipe } from "fxjs";
 
+const pluckData = (obj) => {
+  return obj.data;
+};
+
+const pluckList = (obj) => {
+  return obj.list;
+};
+
+const pluckDataList = (obj) => {
+  return pipe(obj, utils.pluckData, utils.pluckList);
+};
+
+const deconstructLanguageMap = (obj, language) => {
+  return obj.languageMap[language];
+};
+
 const utils = {
-  pluckData(obj) {
-    return obj.data;
-  },
-
-  pluckList(obj) {
-    return obj.list;
-  },
-
-  pluckDataList(obj) {
-    return pipe(obj, utils.pluckData, utils.pluckList);
-  },
-
-  deconstructLanguageMap(obj, language) {
-    return obj.languageMap[language];
-  },
+  pluckData,
+  pluckList,
+  pluckDataList,
+  deconstructLanguageMap,
 };
 
 export default utils;
