@@ -1,4 +1,5 @@
 import axios from "axios";
+import utils from "./utils";
 
 class MemexFetcher {
   fetcher: any;
@@ -22,4 +23,5 @@ const createMemexFetcher = (token: string) => {
 
 export default {
   createMemexFetcher,
+  ...utils,
 };
