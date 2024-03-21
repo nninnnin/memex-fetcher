@@ -1,4 +1,4 @@
-import { pipe } from "fxjs";
+import { go } from "fxjs";
 
 const pluckData = (obj) => {
   return obj.data;
@@ -9,7 +9,7 @@ const pluckList = (obj) => {
 };
 
 const pluckDataList = (obj) => {
-  return pipe(obj, utils.pluckData, utils.pluckList);
+  return go(obj, utils.pluckData, utils.pluckList);
 };
 
 const deconstructLanguageMap = (obj, language) => {
