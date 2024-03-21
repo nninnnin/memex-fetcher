@@ -1,4 +1,4 @@
-import { curry, go, reduce } from "fxjs";
+import { curry, go } from "fxjs";
 
 const pluckData = (obj) => {
   return obj.data;
@@ -21,11 +21,8 @@ const deconstructLanguageMap = (obj, language) => {
 };
 
 const mapObjectProps = (obj, keys, cb) => {
-  const mappedProps = go(
-    keys,
-    reduce((acc, key) => {
-      if (!obj[key]) return acc;
-
+  const mappedProps = go(keys, (keys) =>
+    keys.reduce((acc, key) => {
       acc[key] = cb(obj[key]);
       return acc;
     }, {})
