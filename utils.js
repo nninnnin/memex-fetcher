@@ -21,6 +21,7 @@ const utils = {
   pluckList,
   pluckDataList,
   deconstructLanguageMap,
+  pipe: go,
 };
 
 export default utils;
