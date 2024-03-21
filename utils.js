@@ -12,6 +12,10 @@ const pluckDataList = (obj) => {
   return go(obj, utils.pluckData, utils.pluckList);
 };
 
+const mapListItem = (list, cb) => {
+  return go(list, (list) => list.map(cb));
+};
+
 const deconstructLanguageMap = (obj, language) => {
   return obj.languageMap[language];
 };
@@ -20,6 +24,7 @@ const utils = {
   pluckData,
   pluckList,
   pluckDataList,
+  mapListItem,
   deconstructLanguageMap,
   pipe: go,
 };
