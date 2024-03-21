@@ -10,7 +10,7 @@ const utils = {
   },
 
   pluckDataList(obj) {
-    return pipe(obj, this.pluckData, this.pluckList);
+    return pipe(obj, utils.pluckData, utils.pluckList);
   },
 
   deconstructLanguageMap(obj, language) {
