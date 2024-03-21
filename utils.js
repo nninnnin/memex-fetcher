@@ -24,6 +24,8 @@ const mapObjectProps = (obj, keys, cb) => {
   const mappedProps = go(
     keys,
     reduce((acc, key) => {
+      if (!obj[key]) return acc;
+
       acc[key] = cb(obj[key]);
       return acc;
     }, {})
