@@ -1,4 +1,4 @@
-import { go } from "fxjs";
+import { curry, go } from "fxjs";
 
 const pluckData = (obj) => {
   return obj.data;
@@ -12,9 +12,9 @@ const pluckDataList = (obj) => {
   return go(obj, utils.pluckData, utils.pluckList);
 };
 
-const mapListItem = (list, cb) => {
+const mapListItems = curry((cb, list) => {
   return go(list, (list) => list.map(cb));
-};
+});
 
 const deconstructLanguageMap = (obj, language) => {
   return obj.languageMap[language];
@@ -24,7 +24,7 @@ const utils = {
   pluckData,
   pluckList,
   pluckDataList,
-  mapListItem,
+  mapListItems,
   deconstructLanguageMap,
   pipe: go,
 };
