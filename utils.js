@@ -9,7 +9,7 @@ export const pluckList = (obj) => {
 };
 
 export const pluckDataList = (obj) => {
-  return go(obj, utils.pluckData, utils.pluckList);
+  return go(obj, pluckData, pluckList);
 };
 
 export const mapListItems = curry((cb, list) => {

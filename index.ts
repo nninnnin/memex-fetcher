@@ -1,6 +1,14 @@
 import axios from "axios";
 
-import utils from "./utils";
+import {
+  deconstructLanguageMap,
+  mapListItems,
+  mapObjectProps,
+  pipe,
+  pluckData,
+  pluckDataList,
+  pluckList,
+} from "./utils";
 
 class MemexFetcher {
   fetcher: any;
@@ -24,5 +32,11 @@ const createMemexFetcher = (token: string) => {
 
 export default {
   createMemexFetcher,
-  ...utils,
+  deconstructLanguageMap,
+  mapListItems,
+  mapObjectProps,
+  pipe,
+  pluckData,
+  pluckDataList,
+  pluckList,
 };
