@@ -1,4 +1,5 @@
 import axios from "axios";
+
 import utils from "./utils";
 
 class MemexFetcher {

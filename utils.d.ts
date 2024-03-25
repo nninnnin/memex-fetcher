@@ -11,3 +11,4 @@ export function mapObjectProps(
   keys: Array<unknown>,
   cb: () => void
 ): Record<string, unknown>;
+export function pipe(..._: any[]): any[];

@@ -33,3 +33,5 @@ export const mapObjectProps = (obj, keys, cb) => {
     ...mappedProps,
   };
 };
+
+export const pipe = go;
