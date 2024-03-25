@@ -1,6 +1,6 @@
 {
   "name": "@rebel9/memex-fetcher",
-  "version": "1.0.15",
+  "version": "1.0.17",
   "description": "This package provides methods for fetching & transforming data from Memex.",
   "main": "index.js",
   "scripts": {
@@ -12,6 +12,7 @@
   "author": "Justin Lee",
   "license": "ISC",
   "dependencies": {
+    "@types/axios": "^0.14.0",
     "@types/node": "^20.11.28",
     "axios": "^1.6.7",
     "fxjs": "^0.21.3"
