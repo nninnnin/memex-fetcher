@@ -1,13 +1,8 @@
-"use strict";
-var __importDefault = (this && this.__importDefault) || function (mod) {
-    return (mod && mod.__esModule) ? mod : { "default": mod };
-};
-Object.defineProperty(exports, "__esModule", { value: true });
-var axios_1 = __importDefault(require("axios"));
-var utils_1 = require("./utils");
+var axios = require("axios");
+var _a = require("./utils"), deconstructLanguageMap = _a.deconstructLanguageMap, mapListItems = _a.mapListItems, mapObjectProps = _a.mapObjectProps, pipe = _a.pipe, pluckData = _a.pluckData, pluckDataList = _a.pluckDataList, pluckList = _a.pluckList;
 var MemexFetcher = /** @class */ (function () {
     function MemexFetcher(token) {
-        this.fetcher = axios_1.default.create({
+        this.fetcher = axios.create({
             headers: {
                 "Access-Token": token,
             },
@@ -21,13 +16,13 @@ var MemexFetcher = /** @class */ (function () {
 var createMemexFetcher = function (token) {
     return new MemexFetcher(token);
 };
-exports.default = {
+module.exports = {
     createMemexFetcher: createMemexFetcher,
-    deconstructLanguageMap: utils_1.deconstructLanguageMap,
-    mapListItems: utils_1.mapListItems,
-    mapObjectProps: utils_1.mapObjectProps,
-    pipe: utils_1.pipe,
-    pluckData: utils_1.pluckData,
-    pluckDataList: utils_1.pluckDataList,
-    pluckList: utils_1.pluckList,
+    deconstructLanguageMap: deconstructLanguageMap,
+    mapListItems: mapListItems,
+    mapObjectProps: mapObjectProps,
+    pipe: pipe,
+    pluckData: pluckData,
+    pluckDataList: pluckDataList,
+    pluckList: pluckList,
 };

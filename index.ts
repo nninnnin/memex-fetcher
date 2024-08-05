@@ -1,6 +1,6 @@
-import axios from "axios";
+const axios = require("axios");
 
-import {
+const {
   deconstructLanguageMap,
   mapListItems,
   mapObjectProps,
@@ -8,7 +8,7 @@ import {
   pluckData,
   pluckDataList,
   pluckList,
-} from "./utils";
+} = require("./utils");
 
 class MemexFetcher {
   fetcher: any;
@@ -30,7 +30,7 @@ const createMemexFetcher = (token: string) => {
   return new MemexFetcher(token);
 };
 
-export default {
+module.exports = {
   createMemexFetcher,
   deconstructLanguageMap,
   mapListItems,

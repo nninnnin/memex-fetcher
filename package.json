@@ -1,10 +1,11 @@
 {
   "name": "@rebel9/memex-fetcher",
-  "version": "1.0.26",
+  "version": "1.0.28",
   "description": "This package provides methods for fetching & transforming data from Memex.",
   "main": "/dist/index.js",
   "scripts": {
-    "test": "echo \"Error: no test specified\" && exit 1"
+    "test": "echo \"Error: no test specified\" && exit 1",
+    "transpile": "babel ./dist/index.js --out-dir dist"
   },
   "keywords": [
     "memex"
@@ -18,5 +19,12 @@
     "debug": "^4.3.4",
     "fxjs": "^0.21.3",
     "supports-color": "^8.1.1"
+  },
+  "devDependencies": {
+    "@babel/cli": "^7.24.8",
+    "@babel/core": "^7.25.2",
+    "@babel/plugin-transform-modules-commonjs": "^7.24.8",
+    "@babel/preset-env": "^7.25.3",
+    "@babel/preset-typescript": "^7.24.7"
   }
 }
