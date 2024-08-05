@@ -1,8 +1,8 @@
 {
   "name": "@rebel9/memex-fetcher",
-  "version": "1.0.13",
+  "version": "1.0.15",
   "description": "This package provides methods for fetching & transforming data from Memex.",
-  "main": "index.js",
+  "main": "/dist/index.js",
   "scripts": {
     "test": "echo \"Error: no test specified\" && exit 1"
   },
