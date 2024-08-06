@@ -1,6 +1,11 @@
 {
   "compilerOptions": {
     "esModuleInterop": true,
-    "outDir": "./dist"
-  }
+    "outDir": "./cjs",
+    "baseUrl": "./",
+    "paths": {
+      "@utils": ["utils"]
+    }
+  },
+  "exclude": ["node_modules"]
 }

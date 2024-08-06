@@ -1,5 +1,3 @@
-import { AxiosInstance, AxiosResponse } from "axios";
-
 interface ObjectWithList {
   [key: string]: any;
   list: any;
@@ -21,11 +19,13 @@ interface Utils {
 }
 
 declare class MemexFetcher {
-  fetcher: AxiosInstance;
+  fetcher: {
+    post: (url: string, body: Record<string, unknown>) => Promise<any>;
+  };
 
   constructor(token: string);
 
-  post(url: string, data: Record<string, unknown>): Promise<AxiosResponse<any>>;
+  post(url: string, data: Record<string, unknown>): Promise<any>;
 }
 
 declare const createMemexFetcher: (

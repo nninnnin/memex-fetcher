@@ -8,18 +8,29 @@ const {
   pluckData,
   pluckDataList,
   pluckList,
-} = require("/utils");
+} = require("@utils");
 
 class MemexFetcher {
   fetcher: any;
 
   constructor(token: string, headers: Record<string, unknown> = {}) {
-    this.fetcher = axios.create({
-      headers: {
-        "Access-Token": token,
-        ...headers,
+    this.fetcher = {
+      post: async (url: string, body) => {
+        const result = await fetch(url, {
+          method: "POST",
+          headers: {
+            "Content-Type": "application/json",
+            "Access-Token": `${token}`,
+            ...headers,
+          },
+          body,
+        });
+
+        console.log("fetched", result);
+
+        return result;
       },
-    });
+    };
   }
 
   post(url: string, data: Record<string, unknown>) {

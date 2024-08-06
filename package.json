@@ -1,8 +1,8 @@
 {
   "name": "@rebel9/memex-fetcher",
-  "version": "1.0.37",
+  "version": "1.0.46",
   "description": "This package provides methods for fetching & transforming data from Memex.",
-  "main": "/dist/index.js",
+  "main": "/cjs/index.js",
   "type": "module",
   "types": "/index.d.ts",
   "exports": {
@@ -20,7 +20,7 @@
   "scripts": {
     "test": "echo \"Error: no test specified\" && exit 1",
     "build": "npm run build:cjs",
-    "build:cjs": "tsc --outDir ./cjs"
+    "build:cjs": "webpack --config webpack.config.cjs"
   },
   "keywords": [
     "memex"
@@ -39,6 +39,9 @@
     "@babel/cli": "^7.24.8",
     "@babel/core": "^7.25.2",
     "@babel/preset-env": "^7.25.3",
-    "@babel/preset-typescript": "^7.24.7"
+    "@babel/preset-typescript": "^7.24.7",
+    "ts-loader": "^9.5.1",
+    "webpack": "^5.93.0",
+    "webpack-cli": "^5.1.4"
   }
 }
