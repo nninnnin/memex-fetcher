@@ -26,6 +26,11 @@ class MemexFetcher {
   }
 }
 
+/**
+ * Create a MemexFetcher instance.
+ * @param {string} token
+ * @return {MemexFetcher}
+ */
 const createMemexFetcher = (token: string) => {
   return new MemexFetcher(token);
 };
