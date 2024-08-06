@@ -28,7 +28,10 @@ declare class MemexFetcher {
   post(url: string, data: Record<string, unknown>): Promise<AxiosResponse<any>>;
 }
 
-declare const createMemexFetcher: (token: string) => MemexFetcher;
+declare const createMemexFetcher: (
+  token: string,
+  headers?: Record<string, unknown>
+) => MemexFetcher;
 
 declare const deconstructLanguageMap: Utils["deconstructLanguageMap"];
 declare const mapListItems: Utils["mapListItems"];

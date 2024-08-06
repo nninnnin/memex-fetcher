@@ -13,10 +13,11 @@ const {
 class MemexFetcher {
   fetcher: any;
 
-  constructor(token: string) {
+  constructor(token: string, headers: Record<string, unknown> = {}) {
     this.fetcher = axios.create({
       headers: {
         "Access-Token": token,
+        ...headers,
       },
     });
   }
@@ -31,8 +32,11 @@ class MemexFetcher {
  * @param {string} token
  * @return {MemexFetcher}
  */
-const createMemexFetcher = (token: string) => {
-  return new MemexFetcher(token);
+const createMemexFetcher = (
+  token: string,
+  headers: Record<string, unknown> = {}
+) => {
+  return new MemexFetcher(token, headers);
 };
 
 module.exports = {
