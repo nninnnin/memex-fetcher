@@ -26,8 +26,6 @@ class MemexFetcher {
           body,
         });
 
-        console.log("fetched", result);
-
         return result;
       },
     };
