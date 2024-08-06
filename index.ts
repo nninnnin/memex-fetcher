@@ -8,7 +8,7 @@ const {
   pluckData,
   pluckDataList,
   pluckList,
-} = require("./utils");
+} = require("/utils");
 
 class MemexFetcher {
   fetcher: any;

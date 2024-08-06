@@ -1,8 +1,9 @@
 {
   "name": "@rebel9/memex-fetcher",
-  "version": "1.0.35",
+  "version": "1.0.37",
   "description": "This package provides methods for fetching & transforming data from Memex.",
   "main": "/dist/index.js",
+  "type": "module",
   "types": "/index.d.ts",
   "exports": {
     ".": {
@@ -11,7 +12,7 @@
         "types": "./cjs/index.d.ts"
       },
       "import": {
-        "default": "./esm/index.js",
+        "default": "./esm/index.mjs",
         "types": "./esm/index.d.ts"
       }
     }

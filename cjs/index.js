@@ -10,7 +10,7 @@ var __assign = (this && this.__assign) || function () {
     return __assign.apply(this, arguments);
 };
 var axios = require("axios");
-var _a = require("./utils"), deconstructLanguageMap = _a.deconstructLanguageMap, mapListItems = _a.mapListItems, mapObjectProps = _a.mapObjectProps, pipe = _a.pipe, pluckData = _a.pluckData, pluckDataList = _a.pluckDataList, pluckList = _a.pluckList;
+var _a = require("/utils"), deconstructLanguageMap = _a.deconstructLanguageMap, mapListItems = _a.mapListItems, mapObjectProps = _a.mapObjectProps, pipe = _a.pipe, pluckData = _a.pluckData, pluckDataList = _a.pluckDataList, pluckList = _a.pluckList;
 var MemexFetcher = /** @class */ (function () {
     function MemexFetcher(token, headers) {
         if (headers === void 0) { headers = {}; }
