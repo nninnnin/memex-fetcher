@@ -12,9 +12,9 @@ module.exports = {
     ],
   },
   resolve: {
-    extensions: [".ts", ".js"],
+    extensions: ["", ".ts", ".js", ".cjs", ".mjs"],
     alias: {
-      "@utils": path.resolve(__dirname, "utils"),
+      "@/utils": path.resolve(__dirname, "utils"),
     },
   },
   output: {

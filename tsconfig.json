@@ -4,7 +4,7 @@
     "outDir": "./cjs",
     "baseUrl": "./",
     "paths": {
-      "@utils": ["utils"]
+      "@/utils": ["utils"]
     }
   },
   "exclude": ["node_modules"]

@@ -1,4 +1,5 @@
 const axios = require("axios");
+const utils = require("@/utils/index");
 
 const {
   deconstructLanguageMap,
@@ -8,7 +9,7 @@ const {
   pluckData,
   pluckDataList,
   pluckList,
-} = require("@utils");
+} = utils;
 
 class MemexFetcher {
   fetcher: any;
