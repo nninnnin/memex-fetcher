@@ -1,14 +1,28 @@
 const { curry, go } = require("fxjs");
 
-const pluckData = (obj) => {
+interface ObjectWithData<
+  Data = {
+    [key: string]: any;
+  }
+> {
+  [key: string]: any;
+  data: Data;
+}
+
+interface ObjectWithList {
+  [key: string]: any;
+  list: any[];
+}
+
+const pluckData = (obj: ObjectWithData) => {
   return obj.data;
 };
 
-const pluckList = (obj) => {
+const pluckList = (obj: ObjectWithList) => {
   return obj.list;
 };
 
-const pluckDataList = (obj) => {
+const pluckDataList = (obj: ObjectWithData<ObjectWithList>) => {
   return go(obj, pluckData, pluckList);
 };
 
@@ -36,7 +50,7 @@ const mapObjectProps = (obj, keys, cb) => {
 
 const pipe = go;
 
-module.exports = {
+const Utils = {
   pluckData,
   pluckList,
   pluckDataList,
@@ -45,3 +59,5 @@ module.exports = {
   mapObjectProps,
   pipe,
 };
+
+module.exports = Utils;

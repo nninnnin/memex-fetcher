@@ -1,15 +1,4 @@
-const axios = require("axios");
-const utils = require("@/utils/index");
-
-const {
-  deconstructLanguageMap,
-  mapListItems,
-  mapObjectProps,
-  pipe,
-  pluckData,
-  pluckDataList,
-  pluckList,
-} = utils;
+const utils = require("@/utils/index.ts");
 
 class MemexFetcher {
   fetcher: any;
@@ -51,11 +40,5 @@ const createMemexFetcher = (
 
 module.exports = {
   createMemexFetcher,
-  deconstructLanguageMap,
-  mapListItems,
-  mapObjectProps,
-  pipe,
-  pluckData,
-  pluckDataList,
-  pluckList,
+  ...utils,
 };

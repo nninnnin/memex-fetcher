@@ -5,7 +5,8 @@
     "baseUrl": "./",
     "paths": {
       "@/utils": ["utils"]
-    }
+    },
+    "moduleDetection": "force"
   },
   "exclude": ["node_modules"]
 }
