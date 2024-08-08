@@ -23,7 +23,7 @@ test("fetching list", async () => {
   expect(result).toHaveProperty("pageInfo");
 });
 
-test.only("fetching item", async () => {
+test("fetching item", async () => {
   const PROJECT_ID = "71355a64";
   const MODEL_KEY = "small";
   const ITEM_UID = "e258f6b613744cc3be5fb5cd4aa8a4b9";
