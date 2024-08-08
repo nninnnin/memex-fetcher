@@ -9,7 +9,7 @@
 ```
 import { createMemexFetcher } from "memex-fetcher";
 
-const memexFetcher = createMemexFetcher();
+const memexFetcher = createMemexFetcher(token);
 ```
 
 이렇게 생성된 인스턴스의 `post` 메서드를 이용해 POST 요청을 보낼 수 있습니다.

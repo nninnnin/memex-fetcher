@@ -4,9 +4,12 @@
     "outDir": "./cjs",
     "baseUrl": "./",
     "paths": {
-      "@/utils": ["utils"]
+      "@/utils/*": ["utils/*"]
     },
-    "moduleDetection": "force"
+    "moduleDetection": "force",
+    "module": "commonjs"
+    // "declaration": true
   },
-  "exclude": ["node_modules"]
+  "include": ["./index.ts", "utils"],
+  "exclude": ["node_modules", "cjs"]
 }

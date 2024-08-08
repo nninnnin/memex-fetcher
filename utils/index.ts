@@ -1,18 +1,18 @@
 const { curry, go } = require("fxjs");
 
-interface ObjectWithData<
+type ObjectWithData<
   Data = {
     [key: string]: any;
   }
-> {
+> = {
   [key: string]: any;
   data: Data;
-}
+};
 
-interface ObjectWithList {
+type ObjectWithList = {
   [key: string]: any;
   list: any[];
-}
+};
 
 const pluckData = (obj: ObjectWithData) => {
   return obj.data;
@@ -61,3 +61,6 @@ const Utils = {
 };
 
 module.exports = Utils;
+
+// for noticing typescript
+export = Utils;
