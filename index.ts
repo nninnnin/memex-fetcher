@@ -5,7 +5,11 @@ interface PostBody {
   page: number;
   direction?: "ASC" | "DESC";
   orderCond?: {
-    type: "COMPONENT" | "DATE_CREATE" | "DATE_UPDATE" | "ID";
+    type:
+      | "COMPONENT"
+      | "DATE_CREATE"
+      | "DATE_UPDATE"
+      | "ID";
     condition?: Record<string, unknown>;
   };
   searchConds?: Array<{}>;
@@ -43,7 +47,9 @@ class MemexFetcher {
         headers: Headers = {}
       ) => {
         const bodyStringified =
-          typeof body === "string" ? body : JSON.stringify(body);
+          typeof body === "string"
+            ? body
+            : JSON.stringify(body);
 
         const result = await fetch(url, {
           method: "POST",
@@ -57,7 +63,10 @@ class MemexFetcher {
 
         return result;
       },
-      get: async (url: string, headers: Headers = {}) => {
+      get: async (
+        url: string,
+        headers: Record<string, unknown> = {}
+      ) => {
         const result = await fetch(url, {
           method: "GET",
           headers: {
@@ -72,7 +81,10 @@ class MemexFetcher {
     };
   }
 
-  post(url: string, body: PostBody | PostItemBody | string) {
+  post(
+    url: string,
+    body: PostBody | PostItemBody | string
+  ) {
     return this.fetcher.post(url, body);
   }
 
@@ -89,7 +101,11 @@ class MemexFetcher {
     );
   }
 
-  getListLength(projectId: string, modelKey: string, headers?: Headers) {
+  getListLength(
+    projectId: string,
+    modelKey: string,
+    headers?: Headers
+  ) {
     return this.fetcher.post(
       `https://api.memexdata.io/memex/api/projects/${projectId}/models/${modelKey}/contents/search/v2/count`,
       {},
@@ -132,6 +148,37 @@ class MemexFetcher {
       headers
     );
   }
+  async postMedia(projectId: string, file: Blob) {
+    // 4개의 단계를 거친다.
+    const presignResult = await this._presignUrl(
+      projectId,
+      file
+    );
+
+    console.log("presign result", presignResult);
+
+    // this._uploadPresignedUrl();
+    // this.saveFile();
+    // this.createMedia();
+  }
+
+  private async _presignUrl(
+    projectId: string,
+    file: Blob
+  ) {
+    const res = this.fetcher.post(
+      `https://api.memexdata.io/memex/api/projects/${projectId}/files/access`,
+      file
+    );
+
+    return await res.json();
+  }
+
+  private _uploadPresignedUrl() {}
+
+  private saveFile() {}
+
+  private createMedia() {}
 }
 
 /**
