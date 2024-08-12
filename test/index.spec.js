@@ -44,31 +44,7 @@ test("아이템 가져오기", async () => {
   expect(result).toHaveProperty("data");
 });
 
-test.only("Create media", async () => {
-  const file = await readFile(
-    path.join(__dirname + "/image.jpg")
-  );
-
-  console.log("image file", file);
-
-  const blob = new Blob([file], {
-    type: "application/octet-stream",
-  });
-
-  console.log("is blob?", blob);
-
-  const PROJECT_ID = "71355a64";
-  // const MODEL_KEY = "small";
-
-  // const res = await memexFetcher.postMedia(
-  //   PROJECT_ID,
-  //   1
-  // );
-
-  // console.log("미디어 생성 결과", res);
-});
-
-describe.only("포스트 바디에 대한 테스트들", () => {
+describe("포스트 바디에 대한 테스트들", () => {
   it("포스트 바디를 string 타입으로 넣었을 때 정상적으로 작동한다", async () => {
     const PROJECT_ID = "71355a64";
     const MODEL_KEY = "small";
@@ -106,4 +82,28 @@ describe.only("포스트 바디에 대한 테스트들", () => {
     expect(result).not.toBeNull();
     expect(result).toHaveProperty("list");
   });
+});
+
+test.only("Create media", async () => {
+  const file = await readFile(
+    path.join(__dirname + "/image.jpg")
+  );
+
+  console.log("image file", file);
+
+  const blob = new Blob([file], {
+    type: "application/octet-stream",
+  });
+
+  console.log("is blob?", blob);
+
+  const PROJECT_ID = "71355a64";
+  // const MODEL_KEY = "small";
+
+  // const res = await memexFetcher.postMedia(
+  //   PROJECT_ID,
+  //   1
+  // );
+
+  // console.log("미디어 생성 결과", res);
 });

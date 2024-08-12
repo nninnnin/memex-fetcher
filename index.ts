@@ -101,7 +101,11 @@ class MemexFetcher {
     );
   }
 
-  getListLength(projectId: string, modelKey: string, headers?: Headers) {
+  getListLength(
+    projectId: string,
+    modelKey: string,
+    headers?: Headers
+  ) {
     return this.fetcher.post(
       `https://api.memexdata.io/memex/api/projects/${projectId}/models/${modelKey}/contents/search/v2/count`,
       {},
@@ -144,6 +148,37 @@ class MemexFetcher {
       headers
     );
   }
+  async postMedia(projectId: string, file: Blob) {
+    // 4개의 단계를 거친다.
+    const presignResult = await this._presignUrl(
+      projectId,
+      file
+    );
+
+    console.log("presign result", presignResult);
+
+    // this._uploadPresignedUrl();
+    // this.saveFile();
+    // this.createMedia();
+  }
+
+  private async _presignUrl(
+    projectId: string,
+    file: Blob
+  ) {
+    const res = this.fetcher.post(
+      `https://api.memexdata.io/memex/api/projects/${projectId}/files/access`,
+      file
+    );
+
+    return await res.json();
+  }
+
+  private _uploadPresignedUrl() {}
+
+  private saveFile() {}
+
+  private createMedia() {}
 }
 
 /**
