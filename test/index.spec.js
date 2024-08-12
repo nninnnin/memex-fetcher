@@ -1,3 +1,6 @@
+const path = require("path");
+const { readFile } = require("fs/promises");
+
 require("dotenv").config();
 const Mf = require("../cjs/index");
 
@@ -28,11 +31,39 @@ test("fetching item", async () => {
   const MODEL_KEY = "small";
   const ITEM_UID = "e258f6b613744cc3be5fb5cd4aa8a4b9";
 
-  const res = await memexFetcher.getItem(PROJECT_ID, MODEL_KEY, ITEM_UID);
+  const res = await memexFetcher.getItem(
+    PROJECT_ID,
+    MODEL_KEY,
+    ITEM_UID
+  );
 
   const result = await res.json();
 
   expect(result).toHaveProperty("uid");
   expect(result).toHaveProperty("order");
   expect(result).toHaveProperty("data");
+});
+
+test.only("Create media", async () => {
+  const file = await readFile(
+    path.join(__dirname + "/image.jpg")
+  );
+
+  console.log("image file", file);
+
+  const blob = new Blob([file], {
+    type: "application/octet-stream",
+  });
+
+  console.log("is blob?", blob);
+
+  const PROJECT_ID = "71355a64";
+  // const MODEL_KEY = "small";
+
+  // const res = await memexFetcher.postMedia(
+  //   PROJECT_ID,
+  //   1
+  // );
+
+  // console.log("미디어 생성 결과", res);
 });

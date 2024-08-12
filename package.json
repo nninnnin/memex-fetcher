@@ -18,8 +18,8 @@
     }
   },
   "scripts": {
-    "build": "npm run build:cjs",
-    "build:cjs": "webpack --config webpack.config.cjs",
+    "build": "webpack --config webpack.config.cjs",
+    "watch": "webpack --config webpack.config.cjs --watch",
     "test": "jest"
   },
   "keywords": [
