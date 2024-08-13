@@ -1,53 +1,85 @@
-interface ObjectWithList {
+type ObjectWithData<
+  Data = {
+    [key: string]: any;
+  }
+> = {
   [key: string]: any;
-  list: any;
-}
-
-interface ObjectWithData {
-  [key: string]: any;
-  data: any;
-}
-
-interface Utils {
-  deconstructLanguageMap: (arg: any) => any;
-  mapListItems: (arg: any) => any;
-  mapObjectProps: (arg: any) => any;
-  pipe: (arg: any) => any;
-  pluckData: (arg: ObjectWithData) => any;
-  pluckDataList: (arg: { [key: string]: any; data: ObjectWithList }) => any;
-  pluckList: (arg: ObjectWithList) => any;
-}
-
-declare class MemexFetcher {
-  fetcher: {
-    post: (url: string, body: Record<string, unknown>) => Promise<any>;
-  };
-
-  constructor(token: string);
-
-  post(url: string, data: Record<string, unknown>): Promise<any>;
-}
-
-declare const createMemexFetcher: (
-  token: string,
-  headers?: Record<string, unknown>
-) => MemexFetcher;
-
-declare const deconstructLanguageMap: Utils["deconstructLanguageMap"];
-declare const mapListItems: Utils["mapListItems"];
-declare const mapObjectProps: Utils["mapObjectProps"];
-declare const pipe: Utils["pipe"];
-declare const pluckData: Utils["pluckData"];
-declare const pluckDataList: Utils["pluckDataList"];
-declare const pluckList: Utils["pluckList"];
-
-export {
-  createMemexFetcher,
-  deconstructLanguageMap,
-  mapListItems,
-  mapObjectProps,
-  pipe,
-  pluckData,
-  pluckDataList,
-  pluckList,
+  data: Data;
 };
+type ObjectWithList = {
+  [key: string]: any;
+  list: any[];
+};
+
+interface PostBody {
+  size: number;
+  page: number;
+  direction: "ASC" | "DESC";
+  orderCond?: {
+    type: "COMPONENT" | "DATE_CREATE" | "DATE_UPDATE" | "ID";
+    condition?: Record<string, unknown>;
+  };
+  searchConds?: Array<{}>;
+}
+interface LanguageMap {
+  KO: string;
+  EN: string;
+}
+interface PostItemBody {
+  publish: boolean;
+  data: {
+    id: LanguageMap;
+    tagid: string;
+    name: LanguageMap;
+    description: LanguageMap;
+    longdescription: LanguageMap;
+    eng: boolean;
+  };
+}
+declare class MemexFetcher {
+  fetcher: any;
+  constructor(token: string);
+  post(url: string, body: PostBody): any;
+  getList(
+    projectId: string,
+    modelKey: string,
+    body: PostBody,
+    headers?: Record<string, unknown>
+  ): any;
+  getListLength(
+    projectId: string,
+    modelKey: string,
+    body: PostBody,
+    headers?: Record<string, unknown>
+  ): any;
+  getItem(
+    projectId: string,
+    modelKey: string,
+    itemUid: string,
+    headers?: Record<string, unknown>
+  ): any;
+  postItem(
+    projectId: string,
+    modelKey: string,
+    body: PostItemBody,
+    headers?: Record<string, unknown>
+  ): any;
+  getCategories(
+    projectId: string,
+    modelKey: string,
+    headers?: Record<string, unknown>
+  ): any;
+  pluckData: (obj: ObjectWithData) => {
+    [key: string]: any;
+  };
+  pluckList: (obj: ObjectWithList) => any[];
+  pluckDataList: (obj: ObjectWithData<ObjectWithList>) => any;
+  mapListItems: any;
+  deconstructLanguageMap: (obj: any, language: any) => any;
+  mapObjectProps: (obj: any, keys: any, cb: any) => any;
+  pipe: any;
+}
+declare const Mf: {
+  createMemexFetcher: (token: string) => MemexFetcher;
+};
+export = Mf;
