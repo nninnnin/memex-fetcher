@@ -43,7 +43,7 @@ class MemexFetcher {
     this.fetcher = {
       post: async (
         url: string,
-        body: PostBody | PostItemBody | string | null,
+        body: PostBody | PostItemBody | string,
         headers: Headers = {}
       ) => {
         const bodyStringified =
@@ -58,7 +58,7 @@ class MemexFetcher {
             "Access-Token": `${token}`,
             ...headers,
           },
-          ...(body === null ? {} : { body: bodyStringified }),
+          body: bodyStringified,
         });
 
         return result;
@@ -104,7 +104,7 @@ class MemexFetcher {
   getListLength(projectId: string, modelKey: string, headers?: Headers) {
     return this.fetcher.post(
       `https://api.memexdata.io/memex/api/projects/${projectId}/models/${modelKey}/contents/search/v2/count`,
-      null,
+      {},
       headers
     );
   }
