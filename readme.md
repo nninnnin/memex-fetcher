@@ -4,7 +4,7 @@
 
 ## 데이터 요청을 더 쉽게
 
-1. `createMemexFetcher` 를 사용해 `memexFetcher` 인스턴스를 생성합니다.
+먼저 `createMemexFetcher` 를 사용해 `memexFetcher` 인스턴스를 생성합니다.
 
 ```
 import { createMemexFetcher } from "memex-fetcher";
@@ -12,17 +12,27 @@ import { createMemexFetcher } from "memex-fetcher";
 const memexFetcher = createMemexFetcher(token);
 ```
 
-2. 다음과 같은 메서드를 사용해 미믹스의 데이터를 읽거나 수정할 수 있습니다.
+이후 다음과 같은 메서드를 사용해 미믹스의 데이터를 읽거나 수정할 수 있습니다.
 
-- `getList`
+### `getList(projectId, modelKey, body, [headers])`
 
-- `getListLength`
+projectId (string): 프로젝트의 아이디를 입력합니다.  
+modelKey (string): 모델의 개발키를 입력합니다.  
+body (string | Object): http request body를 입력합니다.  
+(\*요청 시 body에 탑재되어야 하는 내용은 미믹스의 개발 문서를 참고하세요)  
+[headers] (Object, optional): 추가적인 http 헤더를 작성할 수 있습니다.
 
-- `getItem`
+### `getListLength(projectId, modelKey, [headers])`
 
-- `getCategories`
+projectId (string): 프로젝트의 아이디를 입력합니다.  
+modelKey (string): 모델의 개발키를 입력합니다.  
+[headers] (Object, optional): 추가적인 http 헤더를 작성할 수 있습니다.
 
-- `postItem`
+### `getItem(projectId, modelKey, itemUid, [headers])`
+
+### `getCategories(projectId, modelKey, [headers])`
+
+### `postItem(projectId, modelKey, body, [headers])`
 
 ## 편리한 데이터 변형
 
