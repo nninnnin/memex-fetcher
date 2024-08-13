@@ -14,25 +14,25 @@ const memexFetcher = createMemexFetcher(token);
 
 이후 다음과 같은 메서드를 사용해 미믹스의 데이터를 읽거나 수정할 수 있습니다.
 
-### `getList(projectId, modelKey, body, [headers])`
+```
+getList(projectId, modelKey, body, [headers])
+```
 
-projectId (string): 프로젝트의 아이디를 입력합니다.  
-modelKey (string): 모델의 개발키를 입력합니다.  
-body (string | Object): http request body를 입력합니다.  
-(\*요청 시 body에 탑재되어야 하는 내용은 미믹스의 개발 문서를 참고하세요)  
-[headers] (Object, optional): 추가적인 http 헤더를 작성할 수 있습니다.
+```
+getListLength(projectId, modelKey, [headers])
+```
 
-### `getListLength(projectId, modelKey, [headers])`
+```
+getItem(projectId, modelKey, itemUid, [headers])
+```
 
-projectId (string): 프로젝트의 아이디를 입력합니다.  
-modelKey (string): 모델의 개발키를 입력합니다.  
-[headers] (Object, optional): 추가적인 http 헤더를 작성할 수 있습니다.
+```
+getCategories(projectId, modelKey, [headers])
+```
 
-### `getItem(projectId, modelKey, itemUid, [headers])`
-
-### `getCategories(projectId, modelKey, [headers])`
-
-### `postItem(projectId, modelKey, body, [headers])`
+```
+postItem(projectId, modelKey, body, [headers])
+```
 
 ## 편리한 데이터 변형
 
