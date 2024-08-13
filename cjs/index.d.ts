@@ -14,7 +14,7 @@ type ObjectWithList = {
 interface PostBody {
   size: number;
   page: number;
-  direction: "ASC" | "DESC";
+  direction?: "ASC" | "DESC";
   orderCond?: {
     type: "COMPONENT" | "DATE_CREATE" | "DATE_UPDATE" | "ID";
     condition?: Record<string, unknown>;
