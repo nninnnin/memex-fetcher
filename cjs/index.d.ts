@@ -64,10 +64,11 @@ declare class MemexFetcher {
     body: PostItemBody,
     headers?: Record<string, unknown>
   ): any;
-}
-
-declare const Mf: {
-  createMemexFetcher: (token: string) => MemexFetcher;
+  getCategories(
+    projectId: string,
+    modelKey: string,
+    headers?: Record<string, unknown>
+  ): any;
   pluckData: (obj: ObjectWithData) => {
     [key: string]: any;
   };
@@ -77,6 +78,8 @@ declare const Mf: {
   deconstructLanguageMap: (obj: any, language: any) => any;
   mapObjectProps: (obj: any, keys: any, cb: any) => any;
   pipe: any;
+}
+declare const Mf: {
+  createMemexFetcher: (token: string) => MemexFetcher;
 };
-
 export = Mf;

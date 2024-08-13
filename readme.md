@@ -4,7 +4,7 @@
 
 ## 데이터 요청을 더 쉽게
 
-`createMemexFetcher` 를 사용해 `memexFetcher` 인스턴스를 생성합니다.
+1. `createMemexFetcher` 를 사용해 `memexFetcher` 인스턴스를 생성합니다.
 
 ```
 import { createMemexFetcher } from "memex-fetcher";
@@ -12,11 +12,17 @@ import { createMemexFetcher } from "memex-fetcher";
 const memexFetcher = createMemexFetcher(token);
 ```
 
-이렇게 생성된 인스턴스의 `post` 메서드를 이용해 POST 요청을 보낼 수 있습니다.
+2. 다음과 같은 메서드를 사용해 미믹스의 데이터를 읽거나 수정할 수 있습니다.
 
-```
-const response = await memexFetcher.post(url, data)
-```
+- `getList`
+
+- `getListLength`
+
+- `getItem`
+
+- `getCategories`
+
+- `postItem`
 
 ## 편리한 데이터 변형
 
