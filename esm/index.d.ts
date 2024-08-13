@@ -10,7 +10,6 @@ type ObjectWithList = {
   [key: string]: any;
   list: any[];
 };
-
 interface PostBody {
   size: number;
   page: number;
