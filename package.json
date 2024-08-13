@@ -1,6 +1,6 @@
 {
   "name": "@rebel9/memex-fetcher",
-  "version": "1.0.53",
+  "version": "1.0.54",
   "description": "This package provides methods for fetching & transforming data from Memex.",
   "main": "/cjs/index.js",
   "type": "commonjs",
@@ -8,12 +8,12 @@
   "exports": {
     ".": {
       "require": {
-        "default": "./cjs/index.js",
-        "types": "./cjs/index.d.ts"
+        "types": "./cjs/index.d.ts",
+        "default": "./cjs/index.js"
       },
       "import": {
-        "default": "./esm/index.mjs",
-        "types": "./esm/index.d.ts"
+        "types": "./esm/index.d.ts",
+        "default": "./esm/index.mjs"
       }
     }
   },
