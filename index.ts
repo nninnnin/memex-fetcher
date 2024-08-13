@@ -119,6 +119,17 @@ class MemexFetcher {
       headers
     );
   }
+
+  getCategories(
+    projectId: string,
+    modelKey: string,
+    headers: Record<string, unknown> = {}
+  ) {
+    return this.fetcher.get(
+      `https://api.memexdata.io/memex/api/projects/${projectId}/models/${modelKey}/selectors`,
+      headers
+    );
+  }
 }
 
 /**

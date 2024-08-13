@@ -7,8 +7,8 @@
       "@/utils/*": ["utils/*"]
     },
     "moduleDetection": "force",
-    "module": "commonjs"
-    // "declaration": true
+    "module": "commonjs",
+    "declaration": true
   },
   "include": ["./index.ts", "utils"],
   "exclude": ["node_modules", "cjs"]
