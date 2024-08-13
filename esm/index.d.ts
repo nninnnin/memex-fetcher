@@ -10,6 +10,7 @@ type ObjectWithList = {
   [key: string]: any;
   list: any[];
 };
+
 interface PostBody {
   size: number;
   page: number;
@@ -48,12 +49,7 @@ declare class MemexFetcher {
     body: PostBody | string,
     headers?: Headers
   ): any;
-  getListLength(
-    projectId: string,
-    modelKey: string,
-    body: PostBody | string,
-    headers?: Headers
-  ): any;
+  getListLength(projectId: string, modelKey: string, headers?: Headers): any;
   getItem(
     projectId: string,
     modelKey: string,
