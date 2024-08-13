@@ -3,7 +3,7 @@ const utils = require("@/utils/index");
 interface PostBody {
   size: number;
   page: number;
-  direction: "ASC" | "DESC";
+  direction?: "ASC" | "DESC";
   orderCond?: {
     type:
       | "COMPONENT"
