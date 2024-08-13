@@ -21,6 +21,9 @@ interface PostBody {
   };
   searchConds?: Array<{}>;
 }
+interface Headers {
+  [key: string]: string;
+}
 interface LanguageMap {
   KO: string;
   EN: string;
@@ -39,30 +42,30 @@ interface PostItemBody {
 declare class MemexFetcher {
   fetcher: any;
   constructor(token: string);
-  post(url: string, body: PostBody): any;
+  post(url: string, body: PostBody | PostItemBody | string): any;
   getList(
     projectId: string,
     modelKey: string,
-    body: PostBody,
-    headers?: Record<string, unknown>
+    body: PostBody | string,
+    headers?: Headers
   ): any;
   getListLength(
     projectId: string,
     modelKey: string,
-    body: PostBody,
-    headers?: Record<string, unknown>
+    body: PostBody | string,
+    headers?: Headers
   ): any;
   getItem(
     projectId: string,
     modelKey: string,
     itemUid: string,
-    headers?: Record<string, unknown>
+    headers?: Headers
   ): any;
   postItem(
     projectId: string,
     modelKey: string,
-    body: PostItemBody,
-    headers?: Record<string, unknown>
+    body: PostItemBody | string,
+    headers?: Headers
   ): any;
   getCategories(
     projectId: string,

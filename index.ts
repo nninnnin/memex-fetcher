@@ -15,6 +15,10 @@ interface PostBody {
   searchConds?: Array<{}>;
 }
 
+interface Headers {
+  [key: string]: string;
+}
+
 interface LanguageMap {
   KO: string;
   EN: string;
@@ -39,9 +43,14 @@ class MemexFetcher {
     this.fetcher = {
       post: async (
         url: string,
-        body: string,
-        headers: Record<string, unknown> = {}
+        body: string | PostBody,
+        headers: Headers = {}
       ) => {
+        const bodyStringified =
+          typeof body === "string"
+            ? body
+            : JSON.stringify(body);
+
         const result = await fetch(url, {
           method: "POST",
           headers: {
@@ -49,7 +58,7 @@ class MemexFetcher {
             "Access-Token": `${token}`,
             ...headers,
           },
-          body,
+          body: bodyStringified,
         });
 
         return result;
@@ -72,15 +81,18 @@ class MemexFetcher {
     };
   }
 
-  post(url: string, body: PostBody) {
+  post(
+    url: string,
+    body: PostBody | PostItemBody | string
+  ) {
     return this.fetcher.post(url, body);
   }
 
   getList(
     projectId: string,
     modelKey: string,
-    body: PostBody,
-    headers?: Record<string, unknown>
+    body: PostBody | string,
+    headers?: Headers
   ) {
     return this.fetcher.post(
       `https://api.memexdata.io/memex/api/projects/${projectId}/models/${modelKey}/contents/search/v2`,
@@ -92,8 +104,8 @@ class MemexFetcher {
   getListLength(
     projectId: string,
     modelKey: string,
-    body: PostBody,
-    headers?: Record<string, unknown>
+    body: PostBody | string,
+    headers?: Headers
   ) {
     return this.fetcher.post(
       `https://api.memexdata.io/memex/api/projects/${projectId}/models/${modelKey}/contents/search/v2/count`,
@@ -106,7 +118,7 @@ class MemexFetcher {
     projectId: string,
     modelKey: string,
     itemUid: string,
-    headers?: Record<string, unknown>
+    headers?: Headers
   ) {
     return this.fetcher.get(
       `https://api.memexdata.io/memex/api/projects/${projectId}/models/${modelKey}/contents/${itemUid}/v2`,
@@ -117,8 +129,8 @@ class MemexFetcher {
   postItem(
     projectId: string,
     modelKey: string,
-    body: PostItemBody,
-    headers?: Record<string, unknown>
+    body: PostItemBody | string,
+    headers?: Headers
   ) {
     return this.fetcher.post(
       `https://api.memexdata.io/memex/external/projects/${projectId}/models/${modelKey}/contents`,
