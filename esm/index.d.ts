@@ -10,7 +10,6 @@ type ObjectWithList = {
   [key: string]: any;
   list: any[];
 };
-
 interface PostBody {
   size: number;
   page: number;
@@ -67,6 +66,9 @@ declare class MemexFetcher {
     modelKey: string,
     headers?: Record<string, unknown>
   ): any;
+}
+declare const Mf: {
+  createMemexFetcher: (token: string) => MemexFetcher;
   pluckData: (obj: ObjectWithData) => {
     [key: string]: any;
   };
@@ -76,8 +78,5 @@ declare class MemexFetcher {
   deconstructLanguageMap: (obj: any, language: any) => any;
   mapObjectProps: (obj: any, keys: any, cb: any) => any;
   pipe: any;
-}
-declare const Mf: {
-  createMemexFetcher: (token: string) => MemexFetcher;
 };
 export = Mf;
