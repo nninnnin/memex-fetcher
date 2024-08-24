@@ -15,7 +15,11 @@ interface PostBody {
   page: number;
   direction?: "ASC" | "DESC";
   orderCond?: {
-    type: "COMPONENT" | "DATE_CREATE" | "DATE_UPDATE" | "ID";
+    type:
+      | "COMPONENT"
+      | "DATE_CREATE"
+      | "DATE_UPDATE"
+      | "ID";
     condition?: Record<string, unknown>;
   };
   searchConds?: Array<{}>;
@@ -38,17 +42,42 @@ interface PostItemBody {
     eng: boolean;
   };
 }
+interface MediaCreationResult {
+  id: number;
+  file: {
+    id: number;
+    name: string;
+    path: string;
+  };
+  languageMap: {
+    KO: {
+      name: string;
+    };
+  };
+  mediaType: string;
+  value: string;
+}
 declare class MemexFetcher {
   fetcher: any;
   constructor(token: string);
-  post(url: string, body: PostBody | PostItemBody | string): any;
+  post(
+    url: string,
+    body:
+      | PostBody
+      | PostItemBody
+      | string
+  ): any;
   getList(
     projectId: string,
     modelKey: string,
     body: PostBody | string,
     headers?: Headers
   ): any;
-  getListLength(projectId: string, modelKey: string, headers?: Headers): any;
+  getListLength(
+    projectId: string,
+    modelKey: string,
+    headers?: Headers
+  ): any;
   getItem(
     projectId: string,
     modelKey: string,
@@ -66,17 +95,38 @@ declare class MemexFetcher {
     modelKey: string,
     headers?: Record<string, unknown>
   ): any;
+  postMedia(
+    projectId: string,
+    file: File
+  ): Promise<MediaCreationResult>;
+  private _presignUrl;
+  private _uploadPresignedUrl;
+  private saveFile;
+  private createMedia;
 }
 declare const Mf: {
-  createMemexFetcher: (token: string) => MemexFetcher;
+  createMemexFetcher: (
+    token: string
+  ) => MemexFetcher;
   pluckData: (obj: ObjectWithData) => {
     [key: string]: any;
   };
-  pluckList: (obj: ObjectWithList) => any[];
-  pluckDataList: (obj: ObjectWithData<ObjectWithList>) => any;
+  pluckList: (
+    obj: ObjectWithList
+  ) => any[];
+  pluckDataList: (
+    obj: ObjectWithData<ObjectWithList>
+  ) => any;
   mapListItems: any;
-  deconstructLanguageMap: (obj: any, language: any) => any;
-  mapObjectProps: (obj: any, keys: any, cb: any) => any;
+  deconstructLanguageMap: (
+    obj: any,
+    language: any
+  ) => any;
+  mapObjectProps: (
+    obj: any,
+    keys: any,
+    cb: any
+  ) => any;
   pipe: any;
 };
 export = Mf;
