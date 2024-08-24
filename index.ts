@@ -36,6 +36,29 @@ interface PostItemBody {
   };
 }
 
+interface MemexUploadedResult {
+  fileId: number;
+  languageMap: null;
+  type: string;
+  value: string;
+}
+
+interface MediaCreationResult {
+  id: number;
+  file: {
+    id: number;
+    name: string;
+    path: string;
+  };
+  languageMap: {
+    KO: {
+      name: string;
+    };
+  };
+  mediaType: string;
+  value: string;
+}
+
 class MemexFetcher {
   fetcher: any;
 
@@ -43,7 +66,10 @@ class MemexFetcher {
     this.fetcher = {
       post: async (
         url: string,
-        body: PostBody | PostItemBody | string,
+        body:
+          | PostBody
+          | PostItemBody
+          | string,
         headers: Headers = {}
       ) => {
         const bodyStringified =
@@ -51,30 +77,41 @@ class MemexFetcher {
             ? body
             : JSON.stringify(body);
 
-        const result = await fetch(url, {
-          method: "POST",
-          headers: {
-            "Content-Type": "application/json",
-            "Access-Token": `${token}`,
-            ...headers,
-          },
-          body: bodyStringified,
-        });
+        const result = await fetch(
+          url,
+          {
+            method: "POST",
+            headers: {
+              "Content-Type":
+                "application/json",
+              "Access-Token": `${token}`,
+              ...headers,
+            },
+            body: bodyStringified,
+          }
+        );
 
         return result;
       },
       get: async (
         url: string,
-        headers: Record<string, unknown> = {}
+        headers: Record<
+          string,
+          unknown
+        > = {}
       ) => {
-        const result = await fetch(url, {
-          method: "GET",
-          headers: {
-            "Content-Type": "application/json",
-            "Access-Token": `${token}`,
-            ...headers,
-          },
-        });
+        const result = await fetch(
+          url,
+          {
+            method: "GET",
+            headers: {
+              "Content-Type":
+                "application/json",
+              "Access-Token": `${token}`,
+              ...headers,
+            },
+          }
+        );
 
         return result;
       },
@@ -83,7 +120,10 @@ class MemexFetcher {
 
   post(
     url: string,
-    body: PostBody | PostItemBody | string
+    body:
+      | PostBody
+      | PostItemBody
+      | string
   ) {
     return this.fetcher.post(url, body);
   }
@@ -141,44 +181,169 @@ class MemexFetcher {
   getCategories(
     projectId: string,
     modelKey: string,
-    headers: Record<string, unknown> = {}
+    headers: Record<
+      string,
+      unknown
+    > = {}
   ) {
     return this.fetcher.get(
       `https://api.memexdata.io/memex/api/projects/${projectId}/models/${modelKey}/selectors`,
       headers
     );
   }
-  async postMedia(projectId: string, file: Blob) {
-    // 4개의 단계를 거친다.
-    const presignResult = await this._presignUrl(
-      projectId,
-      file
-    );
 
-    console.log("presign result", presignResult);
+  async postMedia(
+    projectId: string,
+    file: File
+  ) {
+    try {
+      // 4개의 단계를 거친다.
+      const presignResult =
+        await this._presignUrl(
+          projectId,
+          file.name
+        );
 
-    // this._uploadPresignedUrl();
-    // this.saveFile();
-    // this.createMedia();
+      console.log(
+        "presign result",
+        presignResult
+      );
+
+      const {
+        url,
+        metadata,
+        key: presignedKey,
+      } = presignResult;
+
+      const uploadResult =
+        await this._uploadPresignedUrl(
+          file,
+          url,
+          metadata
+        );
+
+      console.log(
+        "upload result",
+        uploadResult
+      );
+
+      if (!uploadResult) {
+        throw new Error(
+          "Failed to upload file"
+        );
+      }
+
+      const saveFileResult =
+        await this.saveFile(
+          projectId,
+          presignedKey
+        );
+
+      console.log(
+        "saveFile result",
+        saveFileResult
+      );
+
+      const mediaCreationResult =
+        await this.createMedia(
+          projectId,
+          saveFileResult
+        );
+
+      console.log(
+        "mediaCreation result",
+        mediaCreationResult
+      );
+
+      return mediaCreationResult;
+    } catch (error) {
+      console.log(error);
+    }
   }
 
   private async _presignUrl(
     projectId: string,
-    file: Blob
+    filename: string
   ) {
-    const res = this.fetcher.post(
+    console.log(
+      "filename to be presigned",
+      filename
+    );
+
+    const res = await this.fetcher.post(
       `https://api.memexdata.io/memex/api/projects/${projectId}/files/access`,
-      file
+      filename
     );
 
     return await res.json();
   }
 
-  private _uploadPresignedUrl() {}
+  private async _uploadPresignedUrl(
+    file: File,
+    presignedUrl: string,
+    metadata: {
+      [key: string]: string;
+    }
+  ) {
+    console.log(
+      "presigned url",
+      presignedUrl
+    );
 
-  private saveFile() {}
+    const res = await fetch(
+      presignedUrl,
+      {
+        method: "PUT",
+        body: file,
+        headers: {
+          ...metadata,
+        },
+      }
+    );
 
-  private createMedia() {}
+    return res.ok;
+  }
+
+  private async saveFile(
+    projectId: string,
+    presignedKey: string
+  ) {
+    const url = `https://api.memexdata.io/memex/api/projects/${projectId}/files/upload`;
+
+    const res = await this.fetcher.post(
+      url,
+      presignedKey
+    );
+
+    return await res.json();
+  }
+
+  private async createMedia(
+    projectId: string,
+    uploadedResult: MemexUploadedResult
+  ) {
+    const url = `https://api.memexdata.io/memex/api/projects/${projectId}/media`;
+
+    const filename =
+      uploadedResult.value;
+
+    const body = JSON.stringify({
+      ...uploadedResult,
+      languageMap: {
+        KO: {
+          name: filename,
+          description: "",
+        },
+      },
+    });
+
+    const res = await this.fetcher.post(
+      url,
+      body
+    );
+
+    return (await res.json()) as MediaCreationResult;
+  }
 }
 
 /**
@@ -186,12 +351,16 @@ class MemexFetcher {
  * @param {string} token
  * @return {MemexFetcher}
  */
-const createMemexFetcher = (token: string) => {
+const createMemexFetcher = (
+  token: string
+) => {
   return new MemexFetcher(token);
 };
 
 const Mf: {
-  createMemexFetcher: (token: string) => MemexFetcher;
+  createMemexFetcher: (
+    token: string
+  ) => MemexFetcher;
 } = {
   createMemexFetcher,
   ...utils,
