@@ -64,6 +64,35 @@ class MemexFetcher {
 
   constructor(token: string) {
     this.fetcher = {
+      put: async (
+        url: string,
+        body:
+          | PostBody
+          | PostItemBody
+          | string,
+        headers: Headers = {}
+      ) => {
+        const bodyStringified =
+          typeof body === "string"
+            ? body
+            : JSON.stringify(body);
+
+        const result = await fetch(
+          url,
+          {
+            method: "PUT",
+            headers: {
+              "Content-Type":
+                "application/json",
+              "Access-Token": `${token}`,
+              ...headers,
+            },
+            body: bodyStringified,
+          }
+        );
+
+        return result;
+      },
       post: async (
         url: string,
         body:
@@ -172,6 +201,23 @@ class MemexFetcher {
     headers?: Headers
   ) {
     return this.fetcher.post(
+      `https://api.memexdata.io/memex/external/projects/${projectId}/models/${modelKey}/contents`,
+      body,
+      headers
+    );
+  }
+
+  updateItem(
+    projectId: string,
+    modelKey: string,
+    body:
+      | (PostItemBody & {
+          uid: string;
+        })
+      | string,
+    headers?: Headers
+  ) {
+    return this.fetcher.put(
       `https://api.memexdata.io/memex/external/projects/${projectId}/models/${modelKey}/contents`,
       body,
       headers

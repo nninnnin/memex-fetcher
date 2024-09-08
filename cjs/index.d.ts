@@ -10,6 +10,7 @@ type ObjectWithList = {
   [key: string]: any;
   list: any[];
 };
+
 interface PostBody {
   size: number;
   page: number;
@@ -90,6 +91,16 @@ declare class MemexFetcher {
     body: PostItemBody | string,
     headers?: Headers
   ): any;
+  updateItem(
+    projectId: string,
+    modelKey: string,
+    body:
+      | (PostItemBody & {
+          uid: string;
+        })
+      | string,
+    headers?: Headers
+  ): any;
   getCategories(
     projectId: string,
     modelKey: string,
@@ -104,6 +115,7 @@ declare class MemexFetcher {
   private saveFile;
   private createMedia;
 }
+
 declare const Mf: {
   createMemexFetcher: (
     token: string
@@ -129,4 +141,5 @@ declare const Mf: {
   ) => any;
   pipe: any;
 };
+
 export = Mf;

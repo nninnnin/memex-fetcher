@@ -101,7 +101,7 @@ describe("포스트 바디에 대한 테스트들", () => {
   });
 });
 
-test.only("Create media", async () => {
+test("미디어 생성하기", async () => {
   const file =
     await readFileAsMimicFile(
       path.join(
@@ -118,4 +118,43 @@ test.only("Create media", async () => {
     );
 
   console.log("미디어 생성 결과", res);
+});
+
+const memexFetcherADS =
+  Mf.createMemexFetcher(
+    "<안동선 프로젝트 토큰>"
+  );
+
+test.skip("아이템 업데이트", async () => {
+  const PROJECT_ID = "cbbcc6cd"; // 안동선 프로젝트
+  const MODEL_KEY = "articles";
+
+  const res =
+    await memexFetcherADS.updateItem(
+      PROJECT_ID,
+      MODEL_KEY,
+      JSON.stringify({
+        publish: true,
+        uid: "dc619d4c681f4476b1de917f6eead27a",
+        data: {
+          title: {
+            KO: "졸음이 밀려올 때 2",
+          },
+          articleType: [3952],
+          contents:
+            "<p>잘 시간이다 자자!!</p>",
+          caption: "졸음에 대한 캡션..",
+          credits:
+            "Design and Developed by 이동규",
+          producedAt: "2024.10",
+          tags: [],
+        },
+      })
+    );
+
+  console.log("res", res);
+
+  // const result = await res.json();
+
+  // console.log("result", result);
 });
