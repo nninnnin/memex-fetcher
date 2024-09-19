@@ -34,6 +34,20 @@ getCategories(projectId, modelKey, [headers])
 postItem(projectId, modelKey, body, [headers])
 ```
 
+```
+updateItem(projectId, modelKey, body, [headers])
+
+** body에 수정하려는 row의 `uid` 를 함께 작성합니다.
+```
+
+```
+getCategories(projectId, modelKey, [headers])
+```
+
+```
+postMedia(projectId, file)
+```
+
 ## 편리한 데이터 변형
 
 POST 요청으로 받아온 리스트를 변형할 수 있는 메서드를 사용해보세요. languageMap의 KO 값만을 가져오거나, MediaInterface 형태로 정의되어 있는 이미지 등을 간단한 형태로 변형시켜 가져올 수 있습니다.
