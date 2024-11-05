@@ -116,30 +116,43 @@ declare class MemexFetcher {
   private createMedia;
 }
 
-declare const Mf: {
-  createMemexFetcher: (
+declare module "Mf" {
+  const createMemexFetcher: (
     token: string
   ) => MemexFetcher;
-  pluckData: (obj: ObjectWithData) => {
+  const pluckData: (
+    obj: ObjectWithData
+  ) => {
     [key: string]: any;
   };
-  pluckList: (
+  const pluckList: (
     obj: ObjectWithList
   ) => any[];
-  pluckDataList: (
+  const pluckDataList: (
     obj: ObjectWithData<ObjectWithList>
   ) => any;
-  mapListItems: any;
-  deconstructLanguageMap: (
+  const mapListItems: any;
+  const deconstructLanguageMap: (
     obj: any,
     language: any
   ) => any;
-  mapObjectProps: (
+  const mapObjectProps: (
     obj: any,
     keys: any,
     cb: any
   ) => any;
-  pipe: any;
-};
+  const pipe: any;
+}
 
-export = Mf;
+export default Mf;
+
+export {
+  createMemexFetcher,
+  pluckData,
+  pluckList,
+  pluckDataList,
+  mapListItems,
+  deconstructLanguageMap,
+  mapObjectProps,
+  pipe,
+};
