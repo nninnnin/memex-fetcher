@@ -19,7 +19,7 @@ getList(projectId, modelKey, body, [headers])
 ```
 
 ```
-getListLength(projectId, modelKey, [headers])
+getListLength(projectId, modelKey, [body], [headers])
 ```
 
 ```

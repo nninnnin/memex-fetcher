@@ -77,6 +77,7 @@ declare class MemexFetcher {
   getListLength(
     projectId: string,
     modelKey: string,
+    body?: PostBody | string,
     headers?: Headers
   ): any;
   getItem(

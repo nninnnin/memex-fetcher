@@ -169,15 +169,15 @@ class MemexFetcher {
       headers
     );
   }
-
   getListLength(
     projectId: string,
     modelKey: string,
+    body?: PostBody | string,
     headers?: Headers
   ) {
     return this.fetcher.post(
       `https://api.memexdata.io/memex/api/projects/${projectId}/models/${modelKey}/contents/search/v2/count`,
-      {},
+      body,
       headers
     );
   }
