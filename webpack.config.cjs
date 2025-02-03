@@ -1,6 +1,6 @@
 const path = require("path");
 
-module.exports = {
+const commonConfigs = {
   entry: "./index.ts",
   module: {
     rules: [
@@ -17,14 +17,46 @@ module.exports = {
     ],
   },
   resolve: {
-    extensions: ["", ".ts", ".js", ".cjs", ".mjs"],
+    extensions: [
+      "",
+      ".ts",
+      ".js",
+      ".cjs",
+      ".mjs",
+    ],
     alias: {
-      "@/utils": path.resolve(__dirname, "utils"),
+      "@/utils": path.resolve(
+        __dirname,
+        "utils"
+      ),
     },
   },
-  output: {
-    filename: "index.js",
-    path: path.resolve(__dirname, "cjs"),
-    libraryTarget: "commonjs2",
-  },
 };
+
+const cjsOutputConfig = {
+  filename: "index.js",
+  path: path.resolve(__dirname, "cjs"),
+  libraryTarget: "commonjs2",
+};
+
+const esmOutputConfig = {
+  filename: "index.mjs",
+  path: path.resolve(__dirname, "esm"),
+  libraryTarget: "module",
+};
+
+module.exports = [
+  {
+    ...commonConfigs,
+    name: "cjs",
+    output: cjsOutputConfig,
+  },
+  {
+    ...commonConfigs,
+    name: "esm",
+    output: esmOutputConfig,
+    experiments: {
+      outputModule: true,
+    },
+  },
+];
