@@ -39,24 +39,10 @@ const cjsOutputConfig = {
   libraryTarget: "commonjs2",
 };
 
-const esmOutputConfig = {
-  filename: "index.mjs",
-  path: path.resolve(__dirname, "esm"),
-  libraryTarget: "module",
-};
-
 module.exports = [
   {
     ...commonConfigs,
     name: "cjs",
     output: cjsOutputConfig,
-  },
-  {
-    ...commonConfigs,
-    name: "esm",
-    output: esmOutputConfig,
-    experiments: {
-      outputModule: true,
-    },
   },
 ];

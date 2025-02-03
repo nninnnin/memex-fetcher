@@ -1,6 +1,6 @@
 {
   "name": "@rebel9/memex-fetcher",
-  "version": "1.4.3",
+  "version": "1.4.4",
   "description": "This package provides methods for fetching & transforming data from Memex.",
   "main": "/cjs/index.js",
   "type": "commonjs",
@@ -19,8 +19,7 @@
   },
   "scripts": {
     "build:cjs": "webpack --config webpack.config.cjs --config-name cjs",
-    "build:esm": "webpack --config webpack.config.cjs --config-name esm",
-    "build": "npm run build:cjs && npm run build:esm && cp cjs/index.d.ts esm/index.d.ts",
+    "build": "npm run build:cjs && cp cjs/index.d.ts esm/index.d.ts",
     "watch": "webpack --config webpack.config.cjs --watch",
     "test": "jest"
   },
