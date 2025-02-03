@@ -48,7 +48,26 @@ declare class MemexFetcher {
     private saveFile;
     private createMedia;
 }
+type ObjectWithData<Data = {
+    [key: string]: any;
+}> = {
+    [key: string]: any;
+    data: Data;
+};
+type ObjectWithList = {
+    [key: string]: any;
+    list: any[];
+};
 declare const Mf: {
     createMemexFetcher: (token: string) => MemexFetcher;
+    pluckData: (obj: ObjectWithData) => {
+        [key: string]: any;
+    };
+    pluckList: (obj: ObjectWithList) => any[];
+    pluckDataList: (obj: ObjectWithData<ObjectWithList>) => any;
+    mapListItems: any;
+    deconstructLanguageMap: (obj: any, language: any) => any;
+    mapObjectProps: (obj: any, keys: any, cb: any) => any;
+    pipe: any;
 };
 export = Mf;
