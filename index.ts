@@ -19,21 +19,9 @@ interface Headers {
   [key: string]: string;
 }
 
-interface LanguageMap {
-  KO: string;
-  EN: string;
-}
-
 interface PostItemBody {
   publish: boolean;
-  data: {
-    id: LanguageMap;
-    tagid: string;
-    name: LanguageMap;
-    description: LanguageMap;
-    longdescription: LanguageMap;
-    eng: boolean;
-  };
+  data: unknown;
 }
 
 interface MemexUploadedResult {

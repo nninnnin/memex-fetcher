@@ -1,16 +1,3 @@
-type ObjectWithData<
-  Data = {
-    [key: string]: any;
-  }
-> = {
-  [key: string]: any;
-  data: Data;
-};
-type ObjectWithList = {
-  [key: string]: any;
-  list: any[];
-};
-
 interface PostBody {
   size: number;
   page: number;
@@ -28,20 +15,9 @@ interface PostBody {
 interface Headers {
   [key: string]: string;
 }
-interface LanguageMap {
-  KO: string;
-  EN: string;
-}
 interface PostItemBody {
   publish: boolean;
-  data: {
-    id: LanguageMap;
-    tagid: string;
-    name: LanguageMap;
-    description: LanguageMap;
-    longdescription: LanguageMap;
-    eng: boolean;
-  };
+  data: unknown;
 }
 interface MediaCreationResult {
   id: number;
@@ -116,35 +92,9 @@ declare class MemexFetcher {
   private saveFile;
   private createMedia;
 }
-
-declare namespace Mf {
-  export const createMemexFetcher: (
+declare const Mf: {
+  createMemexFetcher: (
     token: string
   ) => MemexFetcher;
-  export const pluckData: (
-    obj: ObjectWithData
-  ) => {
-    [key: string]: any;
-  };
-  export const pluckList: (
-    obj: ObjectWithList
-  ) => any[];
-  export const pluckDataList: (
-    obj: ObjectWithData<ObjectWithList>
-  ) => any;
-  export const mapListItems: any;
-  export const deconstructLanguageMap: (
-    obj: any,
-    language: any
-  ) => any;
-  export const mapObjectProps: (
-    obj: any,
-    keys: any,
-    cb: any
-  ) => any;
-  export const pipe: any;
-}
-
+};
 export = Mf;
-
-export as namespace Mf;

@@ -59,3 +59,9 @@ const convertedList = convertList(response, {
   ...
 })
 ```
+
+## Release Note
+
+Feb 3, 2025
+
+- `PostItemBody` 의 data 타입에 특정 모델의 필드가 적용되어 있던 상황을 발견하여 `unknown` 타입으로 수정
