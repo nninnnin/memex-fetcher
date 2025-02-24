@@ -1,4 +1,4 @@
-const utils = require("@/utils/index");
+import * as Utils from "@/utils/index";
 
 interface PostBody {
   size: number;
@@ -391,46 +391,9 @@ const createMemexFetcher = (
   return new MemexFetcher(token);
 };
 
-type ObjectWithData<
-  Data = {
-    [key: string]: any;
-  }
-> = {
-  [key: string]: any;
-  data: Data;
-};
-type ObjectWithList = {
-  [key: string]: any;
-  list: any[];
-};
-
-const Mf: {
-  createMemexFetcher: (
-    token: string
-  ) => MemexFetcher;
-  pluckData: (obj: ObjectWithData) => {
-    [key: string]: any;
-  };
-  pluckList: (
-    obj: ObjectWithList
-  ) => any[];
-  pluckDataList: (
-    obj: ObjectWithData<ObjectWithList>
-  ) => any;
-  mapListItems: any;
-  deconstructLanguageMap: (
-    obj: any,
-    language: any
-  ) => any;
-  mapObjectProps: (
-    obj: any,
-    keys: any,
-    cb: any
-  ) => any;
-  pipe: any;
-} = {
+const Mf = {
   createMemexFetcher,
-  ...utils,
+  ...Utils,
 };
 
 module.exports = Mf;

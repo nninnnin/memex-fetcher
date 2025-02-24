@@ -1,40 +1,103 @@
-const { curry, go } = require("fxjs");
+import { LanguageMap } from "../types/memex";
+import { go } from "fxjs";
+import { curry } from "@fxts/core";
+import Curry from "@fxts/core/dist/types/types/Curry";
 
 type ObjectWithData<
   Data = {
-    [key: string]: any;
+    [key: string]: unknown;
   }
 > = {
-  [key: string]: any;
+  [key: string]: unknown;
   data: Data;
 };
 
+type ListItem = {
+  uid: string;
+  data: Record<string, unknown>;
+  createdAt: string;
+  updateAt: string;
+};
+type List = Array<ListItem>;
+
 type ObjectWithList = {
   [key: string]: any;
-  list: any[];
+  list: List;
 };
 
-const pluckData = (obj: ObjectWithData) => {
+export const pluckData = <Data>(
+  obj: ObjectWithData<Data>
+): Data => {
   return obj.data;
 };
 
-const pluckList = (obj: ObjectWithList) => {
+export const pluckList = (
+  obj: ObjectWithList
+): List => {
   return obj.list;
 };
 
-const pluckDataList = (obj: ObjectWithData<ObjectWithList>) => {
+export const pluckDataList = (
+  obj: ObjectWithData<ObjectWithList>
+) => {
   return go(obj, pluckData, pluckList);
 };
 
-const mapListItems = curry((cb, list) => {
-  return go(list, (list) => list.map(cb));
-});
+export const flattenListItem =
+  (listItem: {
+    uid: string;
+    data: Record<string, unknown>;
+    createdAt: string;
+    updateAt: string;
+  }) => {
+    return {
+      uid: listItem.uid,
+      ...listItem.data,
+      createdAt: listItem.createdAt,
+      updateAt: listItem.updateAt,
+    };
+  };
 
-const deconstructLanguageMap = (obj, language) => {
+type MapListItemsFn = Curry<
+  <ListItem, MappedItem>(
+    cb: (item: ListItem) => MappedItem,
+    list: Array<ListItem>
+  ) => Array<MappedItem>
+>;
+
+export const mapListItems: MapListItemsFn =
+  curry(
+    <ListItem, MappedItem>(
+      cb: (
+        item: ListItem
+      ) => MappedItem,
+      list: Array<ListItem>
+    ): Array<MappedItem> => {
+      return go(list, (list) =>
+        list.map(cb)
+      );
+    }
+  );
+
+export const mapListItemsAsync: Curry<
+  (cb, list) => Promise<typeof list>
+> = curry(
+  async (cb, list) =>
+    await Promise.all(list.map(cb))
+);
+
+export const deconstructLanguageMap = (
+  obj,
+  language
+) => {
   return obj.languageMap[language];
 };
 
-const mapObjectProps = (obj, keys, cb) => {
+export const mapObjectProps = (
+  obj,
+  keys,
+  cb
+) => {
   const mappedProps = go(keys, (keys) =>
     keys.reduce((acc, key) => {
       acc[key] = cb(obj[key]);
@@ -48,19 +111,33 @@ const mapObjectProps = (obj, keys, cb) => {
   };
 };
 
-const pipe = go;
+type ExtractStringValuesFn = Curry<
+  <PropKeys = Array<string>>(
+    propKeys: PropKeys,
+    language: "KO",
+    item: Record<string, unknown>
+  ) => {
+    [K in keyof PropKeys]: PropKeys[K] extends string
+      ? string
+      : unknown;
+  }
+>;
 
-const Utils = {
-  pluckData,
-  pluckList,
-  pluckDataList,
-  mapListItems,
-  deconstructLanguageMap,
-  mapObjectProps,
-  pipe,
-};
+export const extractStringValues: ExtractStringValuesFn =
+  curry(
+    (
+      propKeys: string[],
+      language: "KO",
+      item: Record<string, unknown>
+    ) => {
+      return mapObjectProps(
+        item,
+        propKeys,
+        (value: LanguageMap) => {
+          return value[language];
+        }
+      );
+    }
+  );
 
-module.exports = Utils;
-
-// for noticing typescript
-export = Utils;
+export const pipe = go;

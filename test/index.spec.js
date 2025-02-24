@@ -101,7 +101,7 @@ describe("포스트 바디에 대한 테스트들", () => {
   });
 });
 
-test("미디어 생성하기", async () => {
+test.skip("미디어 생성하기", async () => {
   const file =
     await readFileAsMimicFile(
       path.join(

@@ -48,26 +48,56 @@ declare class MemexFetcher {
     private saveFile;
     private createMedia;
 }
-type ObjectWithData<Data = {
-    [key: string]: any;
-}> = {
-    [key: string]: any;
-    data: Data;
-};
-type ObjectWithList = {
-    [key: string]: any;
-    list: any[];
-};
 declare const Mf: {
-    createMemexFetcher: (token: string) => MemexFetcher;
-    pluckData: (obj: ObjectWithData) => {
+    pluckData: <Data>(obj: {
+        [key: string]: unknown;
+        data: Data;
+    }) => Data;
+    pluckList: (obj: {
         [key: string]: any;
+        list: {
+            uid: string;
+            data: Record<string, unknown>;
+            createdAt: string;
+            updateAt: string;
+        }[];
+    }) => {
+        uid: string;
+        data: Record<string, unknown>;
+        createdAt: string;
+        updateAt: string;
+    }[];
+    pluckDataList: (obj: {
+        [key: string]: unknown;
+        data: {
+            [key: string]: any;
+            list: {
+                uid: string;
+                data: Record<string, unknown>;
+                createdAt: string;
+                updateAt: string;
+            }[];
+        };
+    }) => any;
+    flattenListItem: (listItem: {
+        uid: string;
+        data: Record<string, unknown>;
+        createdAt: string;
+        updateAt: string;
+    }) => {
+        createdAt: string;
+        updateAt: string;
+        uid: string;
     };
-    pluckList: (obj: ObjectWithList) => any[];
-    pluckDataList: (obj: ObjectWithData<ObjectWithList>) => any;
-    mapListItems: any;
+    mapListItems: <T extends any[], G = import("@fxts/core/dist/types/types/Drop").default<import("@fxts/core/dist/types/types/Length").default<T>, [cb: (item: unknown) => unknown, list: unknown[]]>>(...args: import("@fxts/core/dist/types/types/Cast").default<T, [cb?: (item: unknown) => unknown, list?: unknown[]]>) => G extends [any, ...any[]] ? import("@fxts/core/dist/types/types/Curry").default<(...args: G) => unknown[]> : unknown[];
+    mapListItemsAsync: import("@fxts/core/dist/types/types/Curry").default<(cb: any, list: any) => Promise<typeof list>>;
     deconstructLanguageMap: (obj: any, language: any) => any;
     mapObjectProps: (obj: any, keys: any, cb: any) => any;
+    extractStringValues: <T extends any[], G = import("@fxts/core/dist/types/types/Drop").default<import("@fxts/core/dist/types/types/Length").default<T>, [propKeys: unknown, language: "KO", item: Record<string, unknown>]>>(...args: import("@fxts/core/dist/types/types/Cast").default<T, [propKeys?: {}, language?: "KO", item?: Record<string, unknown>]>) => G extends [any, ...any[]] ? import("@fxts/core/dist/types/types/Curry").default<(...args: G) => {}> : {};
+    populateRelations: import("@fxts/core/dist/types/types/Curry").default<(item: Record<string, any>, keys: string[], memexFetcher: any) => Promise<{
+        [x: string]: any;
+    }>>;
     pipe: any;
+    createMemexFetcher: (token: string) => MemexFetcher;
 };
 export = Mf;
