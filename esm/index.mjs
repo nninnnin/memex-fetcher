@@ -11,4 +11,8 @@ export const {
   pluckData,
   pluckDataList,
   pluckList,
+  extractStringValues,
+  flattenListItem,
+  mapListItemsAsync,
+  populateRelations,
 } = cjsModule;
