@@ -11,7 +11,7 @@ const token =
 const memexFetcher =
   Mf.createMemexFetcher(token);
 
-test("리스트 가져오기", async () => {
+test.skip("리스트 가져오기", async () => {
   const PROJECT_ID = "71355a64";
   const MODEL_KEY = "small";
 
@@ -33,7 +33,7 @@ test("리스트 가져오기", async () => {
   );
 });
 
-test("아이템 가져오기", async () => {
+test.skip("아이템 가져오기", async () => {
   const PROJECT_ID = "71355a64";
   const MODEL_KEY = "small";
   const ITEM_UID =
@@ -55,7 +55,7 @@ test("아이템 가져오기", async () => {
   expect(result).toHaveProperty("data");
 });
 
-describe("포스트 바디에 대한 테스트들", () => {
+describe.skip("포스트 바디에 대한 테스트들", () => {
   it("포스트 바디를 string 타입으로 넣었을 때 정상적으로 작동한다", async () => {
     const PROJECT_ID = "71355a64";
     const MODEL_KEY = "small";

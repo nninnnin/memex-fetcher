@@ -38,8 +38,5 @@ type ExtractStringValuesFn = Curry<(<PropKeys = Array<string>>(propKeys: PropKey
     [K in keyof PropKeys]: PropKeys[K] extends string ? string : unknown;
 })>;
 export declare const extractStringValues: ExtractStringValuesFn;
-export declare const populateRelations: Curry<(item: Record<string, any>, keys: string[], memexFetcher: any) => Promise<{
-    [x: string]: any;
-}>>;
 export declare const pipe: any;
 export {};

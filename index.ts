@@ -52,6 +52,37 @@ class MemexFetcher {
 
   constructor(token: string) {
     this.fetcher = {
+      delete: async (
+        url: string,
+        body: {
+          uid: string;
+        },
+        headers: Headers = {}
+      ) => {
+        const bodyStringified =
+          JSON.stringify([body.uid]);
+
+        console.log(
+          "check this: ",
+          bodyStringified
+        );
+
+        const result = await fetch(
+          url,
+          {
+            method: "DELETE",
+            headers: {
+              "Content-Type":
+                "application/json",
+              "Access-Token": `${token}`,
+              ...headers,
+            },
+            body: bodyStringified,
+          }
+        );
+
+        return result;
+      },
       put: async (
         url: string,
         body:
@@ -206,6 +237,21 @@ class MemexFetcher {
     headers?: Headers
   ) {
     return this.fetcher.put(
+      `https://api.memexdata.io/memex/external/projects/${projectId}/models/${modelKey}/contents`,
+      body,
+      headers
+    );
+  }
+
+  deleteItem(
+    projectId: string,
+    modelKey: string,
+    body: {
+      uid: string;
+    },
+    headers?: Headers
+  ) {
+    return this.fetcher.delete(
       `https://api.memexdata.io/memex/external/projects/${projectId}/models/${modelKey}/contents`,
       body,
       headers
