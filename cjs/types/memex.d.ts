@@ -1,5 +1,12 @@
-export type MemexModelRequestResult<T> = {
-    list: T[];
+export type ModelItemResult<ModelItem> = {
+    data: {
+        uid: string;
+        order: number;
+        data: ModelItem;
+    };
+};
+export type ModelListResult<ModelItem> = {
+    list: ModelItem[];
     pageInfo: {
         size: number;
         page: number;
