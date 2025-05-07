@@ -4,13 +4,14 @@ export default cjsModule;
 
 export const {
   createMemexFetcher,
-  deconstructLanguageMap,
   mapListItems,
   mapObjectProps,
   pipe,
   pluckData,
   pluckDataList,
   pluckList,
+  deconstructLanguageMap,
+  deconstructMedia,
   extractStringValues,
   flattenListItem,
   mapListItemsAsync,
