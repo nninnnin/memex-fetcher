@@ -172,3 +172,7 @@ Feb 24, 2025 - version 1.5.0
 Feb 25, 2025 - version 1.5.1
 
 - 버그 픽스: esm/index.mjs에서 새롭게 추가된 유틸리티들이 named exports 되지 않고 있었던 상황을 발견하여 수정하였습니다.
+
+May 7, 2025 - version 1.6.0
+
+- 유틸리티 메서드 `deconstructMedia` 추가

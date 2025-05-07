@@ -1,7 +1,11 @@
-import { LanguageMap } from "../types/memex";
 import { go } from "fxjs";
 import { curry } from "@fxts/core";
 import Curry from "@fxts/core/dist/types/types/Curry";
+
+import {
+  LanguageMap,
+  MediaInterface,
+} from "../types/memex";
 
 type ObjectWithData<
   Data = {
@@ -139,5 +143,19 @@ export const extractStringValues: ExtractStringValuesFn =
       );
     }
   );
+
+export const deconstructMedia = (
+  mediaList: MediaInterface[]
+) => {
+  return mediaList.map((media) => {
+    return {
+      mediaType: media.mediaType,
+      filename: media.file.name,
+      fileType: media.fileType,
+      filePath: media.file.path,
+      fileMeta: media.file.meta,
+    };
+  });
+};
 
 export const pipe = go;

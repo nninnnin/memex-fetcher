@@ -10,6 +10,10 @@
     "module": "commonjs",
     "declaration": true
   },
-  "include": ["./index.ts", "utils"],
+  "include": [
+    "./index.ts",
+    "utils",
+    "types"
+  ],
   "exclude": ["node_modules", "cjs"]
 }

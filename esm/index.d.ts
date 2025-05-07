@@ -94,9 +94,13 @@ declare const Mf: {
     deconstructLanguageMap: (obj: any, language: any) => any;
     mapObjectProps: (obj: any, keys: any, cb: any) => any;
     extractStringValues: <T extends any[], G = import("@fxts/core/dist/types/types/Drop").default<import("@fxts/core/dist/types/types/Length").default<T>, [propKeys: unknown, language: "KO", item: Record<string, unknown>]>>(...args: import("@fxts/core/dist/types/types/Cast").default<T, [propKeys?: {}, language?: "KO", item?: Record<string, unknown>]>) => G extends [any, ...any[]] ? import("@fxts/core/dist/types/types/Curry").default<(...args: G) => {}> : {};
-    populateRelations: import("@fxts/core/dist/types/types/Curry").default<(item: Record<string, any>, keys: string[], memexFetcher: any) => Promise<{
-        [x: string]: any;
-    }>>;
+    deconstructMedia: (mediaList: import("./types/memex").MediaInterface[]) => {
+        mediaType: import("./types/memex").MediaType;
+        filename: string;
+        fileType: import("./types/memex").FileType;
+        filePath: string;
+        fileMeta: import("./types/memex").FileMetaInterface;
+    }[];
     pipe: any;
     createMemexFetcher: (token: string) => MemexFetcher;
 };

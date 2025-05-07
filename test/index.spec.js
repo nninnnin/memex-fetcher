@@ -40,11 +40,11 @@ test("아이템 가져오기", async () => {
     "e258f6b613744cc3be5fb5cd4aa8a4b9";
 
   const res =
-    await memexFetcher.getItem(
-      PROJECT_ID,
-      MODEL_KEY,
-      ITEM_UID
-    );
+    (await memexFetcher.getItem) <
+    {
+      name: string,
+    } >
+    (PROJECT_ID, MODEL_KEY, ITEM_UID);
 
   const result = await res.json();
 

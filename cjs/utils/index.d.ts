@@ -1,3 +1,4 @@
+import { MediaInterface } from "../types/memex";
 import Curry from "@fxts/core/dist/types/types/Curry";
 type ObjectWithData<Data = {
     [key: string]: unknown;
@@ -38,8 +39,12 @@ type ExtractStringValuesFn = Curry<(<PropKeys = Array<string>>(propKeys: PropKey
     [K in keyof PropKeys]: PropKeys[K] extends string ? string : unknown;
 })>;
 export declare const extractStringValues: ExtractStringValuesFn;
-export declare const populateRelations: Curry<(item: Record<string, any>, keys: string[], memexFetcher: any) => Promise<{
-    [x: string]: any;
-}>>;
+export declare const deconstructMedia: (mediaList: MediaInterface[]) => {
+    mediaType: import("../types/memex").MediaType;
+    filename: string;
+    fileType: import("../types/memex").FileType;
+    filePath: string;
+    fileMeta: import("../types/memex").FileMetaInterface;
+}[];
 export declare const pipe: any;
 export {};

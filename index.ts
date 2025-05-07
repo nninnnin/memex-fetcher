@@ -157,6 +157,7 @@ class MemexFetcher {
       headers
     );
   }
+
   getListLength(
     projectId: string,
     modelKey: string,
