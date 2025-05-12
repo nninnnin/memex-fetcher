@@ -176,3 +176,7 @@ Feb 25, 2025 - version 1.5.1
 May 7, 2025 - version 1.6.0
 
 - 유틸리티 메서드 `deconstructMedia` 추가
+
+May 12, 2025 - version 1.7.0
+
+- 유틸리티 메서드 `deconstructRelations` 추가

@@ -101,6 +101,10 @@ declare const Mf: {
         filePath: string;
         fileMeta: import("./types/memex").FileMetaInterface;
     }[];
+    deconstructRelations: (relations: import("./types/memex").RelationInterface[]) => {
+        relatedItemUid: string;
+        relationKey: string;
+    }[];
     pipe: any;
     createMemexFetcher: (token: string) => MemexFetcher;
 };

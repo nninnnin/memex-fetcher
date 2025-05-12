@@ -12,6 +12,7 @@ export const {
   pluckList,
   deconstructLanguageMap,
   deconstructMedia,
+  deconstructRelations,
   extractStringValues,
   flattenListItem,
   mapListItemsAsync,

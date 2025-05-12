@@ -5,6 +5,7 @@ import Curry from "@fxts/core/dist/types/types/Curry";
 import {
   LanguageMap,
   MediaInterface,
+  RelationInterface,
 } from "../types/memex";
 
 type ObjectWithData<
@@ -154,6 +155,18 @@ export const deconstructMedia = (
       fileType: media.fileType,
       filePath: media.file.path,
       fileMeta: media.file.meta,
+    };
+  });
+};
+
+export const deconstructRelations = (
+  relations: RelationInterface[]
+) => {
+  return relations.map((relation) => {
+    return {
+      relatedItemUid: relation.uid,
+      relationKey:
+        relation.languageMap.KO,
     };
   });
 };

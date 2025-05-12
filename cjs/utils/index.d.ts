@@ -1,5 +1,5 @@
-import { MediaInterface } from "../types/memex";
 import Curry from "@fxts/core/dist/types/types/Curry";
+import { MediaInterface, RelationInterface } from "../types/memex";
 type ObjectWithData<Data = {
     [key: string]: unknown;
 }> = {
@@ -45,6 +45,10 @@ export declare const deconstructMedia: (mediaList: MediaInterface[]) => {
     fileType: import("../types/memex").FileType;
     filePath: string;
     fileMeta: import("../types/memex").FileMetaInterface;
+}[];
+export declare const deconstructRelations: (relations: RelationInterface[]) => {
+    relatedItemUid: string;
+    relationKey: string;
 }[];
 export declare const pipe: any;
 export {};
