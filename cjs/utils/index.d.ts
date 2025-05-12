@@ -47,8 +47,8 @@ export declare const deconstructMedia: (mediaList: MediaInterface[]) => {
     fileMeta: import("../types/memex").FileMetaInterface;
 }[];
 export declare const deconstructRelations: (relations: RelationInterface[]) => {
-    relatedItemUid: string;
-    relationKey: string;
+    uid: string;
+    key: string;
 }[];
 export declare const pipe: any;
 export {};

@@ -102,8 +102,8 @@ declare const Mf: {
         fileMeta: import("./types/memex").FileMetaInterface;
     }[];
     deconstructRelations: (relations: import("./types/memex").RelationInterface[]) => {
-        relatedItemUid: string;
-        relationKey: string;
+        uid: string;
+        key: string;
     }[];
     pipe: any;
     createMemexFetcher: (token: string) => MemexFetcher;

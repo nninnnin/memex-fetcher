@@ -164,9 +164,8 @@ export const deconstructRelations = (
 ) => {
   return relations.map((relation) => {
     return {
-      relatedItemUid: relation.uid,
-      relationKey:
-        relation.languageMap.KO,
+      uid: relation.uid,
+      key: relation.languageMap.KO,
     };
   });
 };

@@ -1,6 +1,6 @@
 {
   "name": "@rebel9/memex-fetcher",
-  "version": "1.7.0",
+  "version": "1.7.1",
   "description": "This package provides methods for fetching & transforming data from Memex.",
   "main": "/cjs/index.js",
   "type": "commonjs",

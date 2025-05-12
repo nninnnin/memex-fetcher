@@ -180,3 +180,9 @@ May 7, 2025 - version 1.6.0
 May 12, 2025 - version 1.7.0
 
 - 유틸리티 메서드 `deconstructRelations` 추가
+
+May 12, 2025 - version 1.7.1
+
+- `deconstructRelations` 결과 단순화
+  - `relatedItemUid` => `uid`
+  - `relationKey` => `key`
